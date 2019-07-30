@@ -54,7 +54,8 @@ functions {
 
   meta_p_logit = W * Beta_meta;
 
-  // Compute meta_p
+  // Compute meta_pusing a softmax link. For example, see page 97 in
+  // Extending the Linear Model with R, Faraway 2007.
   for(i in 1:N){
     sum_meta = 1 + sum(exp(meta_p_logit[i, :]));
     for(s in 1:S) {

@@ -1,9 +1,18 @@
 functions {
 
-  // Define a function for the collapsed dirichlet-multinomial
-  // Specifically, the function returns the probability p(X | \alpha) based
-  // On a Dirichlet-Multinomial parameterization. We integrate out the Multinomial
-  // probabilities which we really don't care about.
+  // The function returns the log probability p(X | alpha) of
+  // a Dirichlet-Multinomial model. We integrate out the
+  // Multinomial probabilities which are not of interest in our inference.
+  //
+  // Parameters
+  // ----------
+  // vector x: Observed abundances. Sum to n
+  // vector alphas: Dirichlet parameters of the form I*p_i, where I is the
+  //                dispersion parameter and p_i are the mean parameters
+  //
+  // Returns
+  // -------
+  // real logpdf : The logpdf of the data
   real dirichlet_multinomial(vector x, vector alphas) {
     real n;
     real alpha0;
@@ -36,13 +45,17 @@ functions {
 
 } parameters {
 
-  vector[P] beta; // Coefficients for the link function
-  matrix[K, S - 1] Beta_meta; // Metacommunity OTU coefficients
+  vector[P] beta; // Coefficients for dispersal and drift effects
+
+  // Metacommunity OTU coefficients. Each OTU has its own set of coefficients
+  matrix[K, S - 1] Beta_meta;
 
 } transformed parameters {
 
+  // OTU-specific mean effects modeled on the logit scale. Because each
+  // species is modeled independently, this is different than the
+  // softmax function used in neutral_dirichlet_multinomial.stan
   matrix[N, S - 1] meta_p;
-
   meta_p = inv_logit(W * Beta_meta);
 
 } model {
@@ -59,7 +72,7 @@ functions {
     Beta_meta[k, :] ~ normal(0, 1); // Tight constraints as some might be all 0
   }
 
-
+  // Log-link on the dispersal effects
   I = exp(X*beta);
 
   // Loop through OTUs
@@ -99,6 +112,8 @@ functions {
       abund_OTU[1] = abund[j, i];
       abund_OTU[2] = Nt[j] - abund[j, i];
 
+      // Given the independent species assumption, the log-likelihood of each
+      // OTU for each sample are added together.
       log_lik[j] += dirichlet_multinomial(abund_OTU, alphas);
     }
 
