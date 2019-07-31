@@ -1,0 +1,6 @@
+results/*.pkl
+code/.ipynb_checkpoints/*
+code/__pycache__/*
+.DS_store
+code/.DS_store
+code/stan_code/*pkl
