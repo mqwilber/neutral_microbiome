@@ -1,0 +1,9 @@
+Description of columns in field_data_otus.csv
+
+Lake_ID: The Lake ID of the associated microbial community sample.
+
+ZE: The Bd load on the on frog from which the microbial community was sampled.
+
+SVL: The snout vent length in millimeters of the sampled frog.
+
+Otu*: The relative abundance of the given OTU in the sample.
