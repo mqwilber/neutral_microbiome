@@ -1,7 +1,7 @@
 Analysis code for understanding how drift, dispersal, and selection explain deviations in microbial communities
 from neutral community dynamics.
 
-The methods are described in the manuscript *Fungal infection alters the selection, dispersal, and drift processes structuring the amphibian skin microbiome* which can be found under `nuetral_
+The methods are described in the manuscript *Fungal infection alters the selection, dispersal, and drift processes structuring the amphibian skin microbiome* which can be found under `docs/neutral_microbiome.pdf`.  Supplementary material can be found in `docs/supplementary_material.pdf`.
 
 
 - `docs`: Folder contains the manuscript and supplementary material associated with the code.
