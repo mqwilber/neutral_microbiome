@@ -1,4 +1,4 @@
-Description of columns in field_data_otus.csv.  This is the field data used to fit the community assembly model as described in the manuscript "Fungal infection alters the selection, dispersal, and drift processes structuring the amphibian skin microbiome"
+Description of columns in field_data_otus.csv.  This is the field data used to fit the community assembly model as described in the manuscript "Fungal infection alters the selection, dispersal, and drift processes structuring the amphibian skin microbiome".
 
 Lake_ID: The Lake ID of the associated microbial community sample.
 
